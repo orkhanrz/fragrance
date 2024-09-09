@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+
+<main class="p-11">
+    <div class="mb-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Products</h1>
+        <button class="add-btn border w-6 h-6 text-xl flex justify-center items-center bg-green text-white">+</button>
+    </div>
+
+    <table class="w-full border border-collapse bg-white rounded-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="p-3 border text-sm">Id</th>
+                <th class="p-3 border text-sm">Brand</th>
+                <th class="p-3 border text-sm">Line</th>
+                <th class="p-3 border text-sm">Gender</th>
+                <th class="p-3 border text-sm">Price</th>
+                <th class="p-3 border text-sm">Old Price</th>
+                <th class="p-3 border text-sm">Stock</th>
+                <th class="p-3 border text-sm">Created At</th>
+                <th class="p-3 border text-sm">Edit</th>
+                <th class="p-3 border text-sm">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Fragrances)
+            {
+                <tr class="hover:bg-gray-100" id="@item.FragranceId">
+                    <td class="p-3 border text-center text-sm">@item.FragranceId</td>
+                    <td class="p-3 border text-center text-sm">@item.FragranceBrand</td>
+                    <td class="p-3 border text-center text-sm">@item.FragranceLine</td>
+                    <td class="p-3 border text-center text-sm">@(item.FragranceGender == 0 ? "Male" : "Female")</td>
+                    <td class="p-3 border text-center text-sm text-green-600">$@item.FragrancePrice</td>
+                    <td class="p-3 border text-center text-sm text-red-600 line-through">$@item.FragranceOldPrice</td>
+                    <td class="p-3 border text-center text-sm">@item.FragranceStock</td>
+                    <td class="p-3 border text-center text-sm">27/08/2024</td>
+                    <td class="p-3 border text-center text-sm text-green-600">
+                        <a href="/admin/product/@item.FragranceId" class="edit-btn bg-darkBlue text-white px-3 py-1">Edit</a>
+                    </td>
+                    <td class="p-3 border text-center text-sm text-red-600 line-through">
+                        <button class="delete-btn bg-red text-white px-3 py-1" data-id="@item.FragranceId">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="modal" class="w-full h-full absolute top-0 left-0 bg-gray flex justify-center items-center z-20 py-10 bg-opacity-90 hidden">
+        <div id="modal-inner" class="w-1/2 bg-white p-8 overflow-y-auto h-full">
+            <h1 class="text-3xl font-bold mb-8 text-center">Add Fragrance</h1>
+
+            <form method="post" action="/api/fragrances" enctype="multipart/form-data">
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Brand" type="text" id="brand" name="FragranceBrand" required />
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Line" type="text" id="line" name="FragranceLine" required />
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Price" type="number" id="price" name="FragrancePrice" required />
+                <select class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" name="FragranceGender" id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Stock" type="number" id="stock" name="FragranceStock" required />
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Image" type="file" accept="image/*" name="FragranceImage" required />
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Images" type="file" accept="image/*" name="FragranceImages" multiple />
+                <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Description" type="text" id="description" name="FragranceDesc" required />
+                <textarea class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Long Description" id="long-desc" name="FragranceLongDesc" rows="8"></textarea>
+
+                <div class="flex items-center justify-end mb-6 gap-4">
+                    <button class="py-5 px-10 font-semibold bg-primary text-white transition-colors transition-100" type="submit">Add</button>
+                    <button class="close-modal-btn py-5 px-10 font-semibold bg-gray text-white transition-colors transition-100" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script type="module">import { showAdminNotification } from '/js/utils/notify.js';
+    const deleteBtns = document.querySelectorAll(".delete-btn");
+    const addBtn = document.querySelector('.add-btn');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+    const modal = document.getElementById('modal');
+
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            const id = btn.getAttribute("data-id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch("/api/fragrances/" + id, { method: "DELETE" })
+                        .then((res) => {
+                            if (res.status == 200) {
+                                document.getElementById(id).remove();
+                                return showAdminNotification('Deleted', 'Fragrance with an id of ' + id + ' is deleted!', 'success');
+                            };
+
+                            if (res.status == 404) {
+                                return showAdminNotification('Not found', 'Fragrance with an id of ' + id + ' is not found!', 'error');
+                            };
+
+                            if (res.status == 401) {
+                                return showAdminNotification('Not authorized!', 'You are not authorized to proceed with the action!', 'error');
+                            }
+
+                            showAdminNotification('Oops...', 'Something went wrong :/', 'error');
+                        })
+                        .catch((err) => {
+                            showAdminNotification('Oops...', 'Something went wrong :/', 'error');
+                        });
+                }
+            });
+        });
+    });
+
+    addBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+    closeModalBtn.addEventListener('click', () => modal.classList.add('hidden'));</script>

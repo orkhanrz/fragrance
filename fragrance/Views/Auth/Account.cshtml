@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Account";
+}
+
+@section AccountPageScript {
+    <script type="module" src="~/js/scripts/accountPage.js"></script>
+}
+
+<section class="py-16">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-semibold mb-4 text-center">Account Details</h1>
+        <form id="account-form" class="w-1/2 mx-auto" action="/auth/updateaccount" method="post">
+            <div class="form-control mb-8">
+                <div class="flex justify-between items-center">
+                    <label class="mb-2 block" for="UserName">Name: </label>
+                    <button class="account-edit text-sm text-gray">Edit</button>
+                </div>
+                <input value="@ViewBag.User.UserName" class="border-b border-b-lightGrey w-full p-2 text-sm outline-none" type="text" id="UserName" name="UserName" min="3" required />
+            </div>
+            <div class="form-control mb-8">
+                <div class="flex justify-between items-center">
+                    <label class="mb-2 block" for="UserSurname">Surname: </label>
+                    <button class="account-edit text-sm text-gray">Edit</button>
+                </div>
+                <input value="@ViewBag.User.UserSurname" class="border-b border-b-lightGrey w-full p-2 text-sm outline-none" type="text" id="UserSurname" name="UserSurname" min="3" required />
+            </div>
+            <div class="form-control mb-8">
+                <div class="flex justify-between items-center">
+                    <label class="mb-2 block" for="UserPassword">Current Password: </label>
+                    <button class="account-edit text-sm text-gray">Edit</button>
+                </div>
+                <input value="" class="border-b border-b-lightGrey w-full p-2 text-sm outline-none mb-8" type="password" id="UserPassword" name="UserPassword" />
+
+                <label class="mb-2 block" for="NewPassword">New Password: </label>
+                <input class="border-b border-b-lightGrey w-full p-2 text-sm outline-none" type="password" id="NewPassword" name="NewPassword" />
+            </div>
+            <div class="form-control mb-8">
+                <div class="flex justify-between items-center">
+                    <label class="mb-2 block" for="UserGender">Gender: </label>
+                </div>
+                <div class="flex w-min">
+                    <div class="flex items-center mr-4">
+                        <label class="mr-2">Male</label>
+                        <input type="radio" value="0" @(ViewBag.User.UserGender == 0 ? "checked" : "") name="UserGender"/>
+                    </div>
+                    <div class="flex items-center mr-4">
+                        <label class="mr-2">Female</label>
+                        <input type="radio" value="1" @(ViewBag.User.UserGender == 1 ? "checked" : "") name="UserGender"/>
+                    </div>
+                </div>
+            </div>
+            <button class="px-1 py-4 px-10 font-semibold bg-primary text-white hover:bg-gray transition-colors transition-100">Update Account</button>
+        </form>
+    </div>
+</section>
+

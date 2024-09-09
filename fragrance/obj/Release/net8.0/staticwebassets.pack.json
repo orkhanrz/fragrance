@@ -1,0 +1,229 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/obj/Release/net8.0/scopedcss/projectbundle/fragrance.bundle.scp.css",
+      "PackagePath": "staticwebassets/fragrance.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/css/styles.css",
+      "PackagePath": "staticwebassets/css/styles.css"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/arrows.svg",
+      "PackagePath": "staticwebassets/images/arrows.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/avatar.svg",
+      "PackagePath": "staticwebassets/images/avatar.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/brand-1.webp",
+      "PackagePath": "staticwebassets/images/brand-1.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/brand-2.webp",
+      "PackagePath": "staticwebassets/images/brand-2.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/brand-3.webp",
+      "PackagePath": "staticwebassets/images/brand-3.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/brand-4.avif",
+      "PackagePath": "staticwebassets/images/brand-4.avif"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/brand-5.avif",
+      "PackagePath": "staticwebassets/images/brand-5.avif"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/cart.svg",
+      "PackagePath": "staticwebassets/images/cart.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/email.svg",
+      "PackagePath": "staticwebassets/images/email.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/eye.svg",
+      "PackagePath": "staticwebassets/images/eye.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/facebook.svg",
+      "PackagePath": "staticwebassets/images/facebook.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/flower.webp",
+      "PackagePath": "staticwebassets/images/flower.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/header-logo.png",
+      "PackagePath": "staticwebassets/images/header-logo.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/heart.svg",
+      "PackagePath": "staticwebassets/images/heart.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/hero.jpg",
+      "PackagePath": "staticwebassets/images/hero.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/location.svg",
+      "PackagePath": "staticwebassets/images/location.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/newsletter.jpg",
+      "PackagePath": "staticwebassets/images/newsletter.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/newsletter.webp",
+      "PackagePath": "staticwebassets/images/newsletter.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/parfume-2.jpg",
+      "PackagePath": "staticwebassets/images/parfume-2.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/parfume.avif",
+      "PackagePath": "staticwebassets/images/parfume.avif"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/parfume.jpg",
+      "PackagePath": "staticwebassets/images/parfume.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/phone.svg",
+      "PackagePath": "staticwebassets/images/phone.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/service-1.png",
+      "PackagePath": "staticwebassets/images/service-1.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/service-2.png",
+      "PackagePath": "staticwebassets/images/service-2.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/service-3.png",
+      "PackagePath": "staticwebassets/images/service-3.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/service-4.png",
+      "PackagePath": "staticwebassets/images/service-4.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/star-filled.svg",
+      "PackagePath": "staticwebassets/images/star-filled.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/star.svg",
+      "PackagePath": "staticwebassets/images/star.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/team-1.webp",
+      "PackagePath": "staticwebassets/images/team-1.webp"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/team-2.jpg",
+      "PackagePath": "staticwebassets/images/team-2.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/tiktok.png",
+      "PackagePath": "staticwebassets/images/tiktok.png"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/tiktok.svg",
+      "PackagePath": "staticwebassets/images/tiktok.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/twitter.svg",
+      "PackagePath": "staticwebassets/images/twitter.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/vimeo-v.svg",
+      "PackagePath": "staticwebassets/images/vimeo-v.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/images/youtube.svg",
+      "PackagePath": "staticwebassets/images/youtube.svg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/configs/tailwind.config.js",
+      "PackagePath": "staticwebassets/js/configs/tailwind.config.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/main.js",
+      "PackagePath": "staticwebassets/js/main.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/accountPage.js",
+      "PackagePath": "staticwebassets/js/scripts/accountPage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/checkoutPage.js",
+      "PackagePath": "staticwebassets/js/scripts/checkoutPage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/favoritesPage.js",
+      "PackagePath": "staticwebassets/js/scripts/favoritesPage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/homePage.js",
+      "PackagePath": "staticwebassets/js/scripts/homePage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/productPage.js",
+      "PackagePath": "staticwebassets/js/scripts/productPage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/scripts/productsPage.js",
+      "PackagePath": "staticwebassets/js/scripts/productsPage.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/utils/cart.js",
+      "PackagePath": "staticwebassets/js/utils/cart.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/utils/favorite.js",
+      "PackagePath": "staticwebassets/js/utils/favorite.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/utils/fragrance.js",
+      "PackagePath": "staticwebassets/js/utils/fragrance.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/js/utils/notify.js",
+      "PackagePath": "staticwebassets/js/utils/notify.js"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/uploads/605fcd18-df14-4dec-bcac-7bee6472af98.jpg",
+      "PackagePath": "staticwebassets/uploads/605fcd18-df14-4dec-bcac-7bee6472af98.jpg"
+    },
+    {
+      "Id": "/Users/orkhanrzali/Projects/fragrance/fragrance/wwwroot/uploads/62c48337-b1f9-48af-b1af-8f0b86358a1f.jpeg",
+      "PackagePath": "staticwebassets/uploads/62c48337-b1f9-48af-b1af-8f0b86358a1f.jpeg"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.fragrance.props",
+      "PackagePath": "build\\fragrance.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.fragrance.props",
+      "PackagePath": "buildMultiTargeting\\fragrance.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.fragrance.props",
+      "PackagePath": "buildTransitive\\fragrance.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.fragrance.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

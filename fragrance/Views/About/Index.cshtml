@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+
+<section class="py-14 bg-lightGrey">
+    <h1 class="text-4xl font-bold text-center mb-6">About</h1>
+    <ul class="flex justify-center gap-2">
+        <li class="relative after:content-['>'] after:ml-2 after:text-gray text-gray"><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</section>
+
+@await Html.PartialAsync("~/Views/Shared/_ServicesPartial.cshtml")
+
+<section class="py-20">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-semibold mb-6">Fiama - Powerful Theme for Shop</h1>
+        <p class="mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost exercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+        </p>
+        <iframe src="https://www.youtube.com/embed/_9VUPq3SxOc?start=2" height="500" width="100%" title="Iframe Example"></iframe>
+    </div>
+</section>
+
+<section class="bg-fbBg py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-14">Clients Feedbacks</h1>
+        <div class="flex gap-8">
+            <div class="feedbackItem flex gap-8 flex-1/2 h-72 p-10 bg-white">
+                <img class="h-full w-60 object-cover" src="~/images/team-2.jpg" alt="">
+                <div class="flex flex-col justify-between">
+                    <p class="mb-4 leading-8">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates optio, nostrum quod temporibus velit amet quisquam corrupti enim incidunt aperiam?</p>
+                    <div>
+                        <h3 class="text-lg font-bold">Jacob William</h3>
+                        <h4 class="text-primary font-semibold">Patient</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="feedbackItem flex gap-8 flex-1/2 h-72 p-10 bg-white">
+                <img class="h-full w-60 object-cover" src="~/images/team-2.jpg" alt="">
+                <div class="flex flex-col justify-between">
+                    <p class="mb-4 leading-8">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates optio, nostrum quod temporibus velit amet quisquam corrupti enim incidunt aperiam?</p>
+                    <div>
+                        <h3 class="text-lg font-bold">Jacob William</h3>
+                        <h4 class="text-primary font-semibold">Patient</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-lightGray">
+    <div class="container mx-auto flex justify-between items-center gap-8 py-10">
+        <img class="opacity-50 hover:scale-110 hover:opacity-100 duration-300" src="~/images/brand-1.webp" alt="brand 1" />
+        <img class="opacity-50 hover:scale-110 hover:opacity-100 duration-300" src="~/images/brand-2.webp" alt="brand 2" />
+        <img class="opacity-50 hover:scale-110 hover:opacity-100 duration-300" src="~/images/brand-3.webp" alt="brand 3" />
+        <img class="opacity-50 hover:scale-110 hover:opacity-100 duration-300" src="~/images/brand-4.webp" alt="brand 4" />
+        <img class="opacity-50 hover:scale-110 hover:opacity-100 duration-300" src="~/images/brand-5.webp" alt="brand 5" />
+    </div>
+</section>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/styles.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="~/js/configs/tailwind.config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>@ViewData["Title"]</title>
+</head>
+    <body class="font-primary">
+        <header class="flex items-center justify-between p-11 sticky top-0 left-0 z-10 bg-white shadow-md">
+            <a href="/admin" class="h-4">
+                <img class="w-full h-full" src="~/images/header-logo.png" alt="fiama logo" />
+            </a>
+            <nav>
+                <ul class="uppercase text-sm flex gap-8">
+                    <li class="hover:text-primary"><a href="/admin/products">Products</a></li>
+                    <li class="hover:text-primary"><a href="/admin/orders">Orders</a></li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <li class="hover:text-primary"><a href="/admin/logout">Logout</a></li>
+                    }
+                </ul>
+            </nav>
+        </header>
+        @RenderBody()
+    </body>
+</html>

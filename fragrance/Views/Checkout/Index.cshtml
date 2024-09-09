@@ -1,0 +1,71 @@
+﻿@section CheckoutPageScript {
+    <script type="module" src="~/js/scripts/checkoutPage.js"></script>
+}
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<section class="py-16">
+    <div class="container mx-auto flex gap-10">
+        <div class="flex-1">
+            <div>
+                <form id="checkout-form" class="mb-20">
+                    <div class="form-control mb-5">
+                        <h3 class="text-xl font-bold mb-2">Contact</h3>
+                        <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full mb-4 focus:border-primary outline-none" type="text" value="@ViewBag.User.UserEmail" placeholder="Enter your email address" required/>
+                        <input class="mr-1" type="checkbox" />
+                        <label for="NewsLetter">Email me with news and offers</label>
+                    </div>
+                    <div class="form-control mb-5">
+                        <h3 class="text-xl font-bold mb-2">Delivery</h3>
+                        <select class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full mb-4 focus:border-primary outline-none" required>
+                            <option value="">Country</option>
+                            <option value="az">Azerbaijan</option>
+                            <option value="ge">Georgia</option>
+                            <option value="ru">Russia</option>
+                            <option value="tu">Turkey</option>
+                            <option value="us">United States</option>
+                        </select>
+                        <div class="flex gap-4 mb-4">
+                            <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" value="@ViewBag.User.UserName" placeholder="First name" required/>
+                            <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" value="@ViewBag.User.UserSurname" placeholder="Last name" required/>
+                        </div>
+                        <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full mb-4 focus:border-primary outline-none" type="text" placeholder="Address" required/>
+                        <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full mb-4 focus:border-primary outline-none" type="text" placeholder="Apartment, suite, etc." required/>
+                        <div class="flex gap-4 mb-4">
+                            <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" placeholder="City" required/>
+                            <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" placeholder="State" />
+                            <input class="border border-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" placeholder="Zip Code" required/>
+                        </div>
+                        <input class="mr-1" type="checkbox" />
+                        <label for="NewsLetter">Save this information for next time</label>
+                    </div>
+                    <div class="form-control mb-5">
+                        <h3 class="text-sm font-bold mb-4">Shipping Method</h3>
+                        <input class="border border-gray bg-lightGrey text-gray rounded px-2.5 py-3.5 text-sm block w-full focus:border-primary outline-none" type="text" placeholder="Enter your shipping address to view available shipping methods" />
+                    </div>
+                    <div class="form-control mb-16">
+                        <h3 class="text-xl font-bold mb-1">Payment</h3>
+                        <p class="text-sm text-gray mb-4">All transactions are secure and encrypted.</p>
+                        <div class="bg-lightGrey text-gray rounded px-2.5 py-3.5 text-sm flex flex-col justify-center items-center">
+                            <img src="~/images/cart.svg" class="mb-4 w-10 h-10" />
+                            <p>This store cannot accept payments right now.</p>
+                        </div>
+                    </div>
+                    <button id="checkout-form-btn" class="font-bold rounded w-full py-4">Order</button>
+                </form>
+            </div>
+            <p class="text-gray text-sm border-t border-t-lightGrey pt-4">All rights reserved Fiama-demo</p>
+        </div>
+        <div class="flex-1">
+            <div class="cart-items">
+
+            </div>
+            <div class="cart-info flex justify-between py-6">
+                <p class="font-semibold text-lg">Subtotal:</p>
+                <p class="font-semibold text-lg text-primary cart-total-price">$212.00</p>
+            </div>
+        </div>
+    </div>
+</section>

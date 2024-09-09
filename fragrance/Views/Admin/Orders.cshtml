@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Orders";
+}
+
+<main class="p-11">
+    <div class="mb-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Orders</h1>
+    </div>
+    <table class="w-full border border-collapse bg-white rounded-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="p-3 border text-sm">Id</th>
+                <th class="p-3 border text-sm">Username</th>
+                <th class="p-3 border text-sm">Total</th>
+                <th class="p-3 border text-sm">Status</th>
+                <th class="p-3 border text-sm">Date</th>
+                <th class="p-3 border text-sm">Edit</th>
+                <th class="p-3 border text-sm">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in ViewBag.Orders)
+            {
+                <tr class="hover:bg-gray-100" id="@order.OrderId">
+                    <td class="p-3 border text-center text-sm">@order.OrderId</td>
+                    <td class="p-3 border text-center text-sm">@order.OrderUser.UserName @order.OrderUser.UserSurname</td>
+                    <td class="p-3 border text-center text-sm">$@order.OrderTotalPrice</td>
+                    <td class="p-3 border text-center text-sm">@order.OrderStatus</td>
+                    <td class="p-3 border text-center text-sm">@order.OrderDate</td>
+                    <td class="p-3 border text-center text-sm text-green-600"><button class="edit-btn bg-darkBlue text-white px-3 py-1" data-id="@order.OrderId">Edit</button></td>
+                    <td class="p-3 border text-center text-sm text-red-600 line-through"><button class="delete-btn bg-red text-white px-3 py-1" data-id="@order.OrderId">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="modal" class="w-full h-full absolute top-0 left-0 bg-gray flex justify-center items-center z-20 py-10 bg-opacity-90 hidden">
+        <div id="modal-inner" class="w-1/2 bg-white p-8 overflow-y-auto h-full">
+            <div id="order-details" class="container mx-auto p-6">
+                
+            </div>
+        </div>
+    </div>
+</main>
+<script type="module">import { showAdminNotification } from '/js/utils/notify.js';
+    const deleteBtns = document.querySelectorAll(".delete-btn");
+    const editBtns = document.querySelectorAll('.edit-btn');
+    const modal = document.getElementById('modal');
+    const orderDetails = document.getElementById('order-details');
+    const orderedFragrancesTableBody = document.querySelector('#ordered-fragrances-table tbody');
+
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            const id = btn.getAttribute("data-id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch("/api/orders/" + id, { method: "DELETE" })
+                        .then((res) => {
+                            console.log(res);
+
+                            if (res.status == 200) {
+                                document.getElementById(id).remove();
+                                return showAdminNotification('Deleted', 'Order with an id of ' + id + ' is deleted!', 'success');
+                            };
+
+                            if (res.status == 404) {
+                                return showAdminNotification('Not found', 'Order with an id of ' + id + ' is not found!', 'error');
+                            };
+
+                            if (res.status == 401) {
+                                return showAdminNotification('Not authorized!', 'You are not authorized to proceed with the action!', 'error');
+                            }
+
+                            showAdminNotification('Oops...', 'Something went wrong :/', 'error');
+                        })
+                        .catch((err) => {
+                            showAdminNotification('Oops...', 'Something went wrong :/', 'error');
+                        });
+                }
+            });
+        });
+    });
+
+    editBtns.forEach(editBtn => editBtn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+
+        fetch('/api/orders/' + id)
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then(data => {
+                console.log(data);
+
+                let orderDetailsHtml = `
+                    <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+                        <h2 class="text-xl font-semibold mb-4">Order Details</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><strong class="mr-1">Order ID:</strong> #${data.orderId}</div>
+                            <div><strong class="mr-1">User:</strong> ${data.orderUser.userName} ${data.orderUser.userSurname}</div>
+                            <div><strong class="mr-1">Order Date:</strong> ${data.orderDate}</div>
+                            <div><strong class="mr-1">Total Price:</strong> $${data.orderTotalPrice}</div>
+                            <div>
+                                <strong class="mr-1">Status:</strong>
+                                <select class="border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary">
+                                    <option value="Pending" ${data.orderStatus === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Approved" ${data.orderStatus === 'Approved' ? 'selected' : ''}>Approved</option>
+                                    <option value="Rejected" ${data.orderStatus === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h2 class="text-xl font-semibold mb-4">Fragrances Ordered</h2>
+                        <table id="ordered-fragrances-table" class="min-w-full table-auto">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Image</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Brand</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Line</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Quantity</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Unit Price</th>
+                                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.orderItems.map(f => `
+                                        <tr class="bg-white border-b">
+                                            <td class="px-4 py-2">
+                                                <img class="h-16 w-16 object-cover" src="${f.orderItemFragrance.fragranceImage}" alt="${f.orderItemFragrance.fragranceLine} ${f.orderItemFragrance.fragranceBrand}">
+                                            </td>
+                                            <td class="px-4 py-2 text-sm">${f.orderItemFragrance.fragranceBrand}</td>
+                                            <td class="px-4 py-2 text-sm">${f.orderItemFragrance.fragranceLine}</td>
+                                            <td class="px-4 py-2 text-sm">${f.orderItemQuantity}</td>
+                                            <td class="px-4 py-2 text-sm">$${f.orderItemFragrance.fragrancePrice}</td>
+                                            <td class="px-4 py-2 text-sm">$${f.orderItemUnitPrice}</td>
+                                        </tr>
+                                    `).join('')
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex items-center justify-end my-6 gap-4">
+                        <button class="update-btn py-5 px-10 font-semibold bg-primary text-white transition-colors transition-100" type="submit">Update</button>
+                        <button class="close-modal-btn py-5 px-10 font-semibold bg-gray text-white transition-colors transition-100" type="button">Cancel</button>
+                    </div>
+            `;
+
+                orderDetails.innerHTML = orderDetailsHtml;
+                document.querySelector('.close-modal-btn').addEventListener('click', () => modal.classList.add('hidden'));
+                modal.classList.remove('hidden');
+            })
+            .catch(err => console.log(err));
+    }));
+
+
+</script>

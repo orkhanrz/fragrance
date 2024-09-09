@@ -1,0 +1,427 @@
+﻿@{
+    ViewData["Title"] = "Product";
+}
+
+@section ProductPageScript {
+    <script type="module" src="~/js/scripts/productPage.js"></script>
+}
+
+<section class="py-14 bg-lightGrey">
+    <h1 class="text-4xl font-bold text-center mb-6">Product</h1>
+    <ul class="flex justify-center gap-2">
+        <li class="relative after:content-['>'] after:ml-2 after:text-gray text-gray"><a href="/">Home</a></li>
+        <li><a href="/products">Products</a></li>
+    </ul>
+</section>
+
+<section class="py-20">
+    <div class="product-item container mx-auto flex gap-12" id="@ViewBag.Fragrance.FragranceId">
+        <div class="flex-1">
+            <div class="product-item-image w-full h-[600px] mb-4">
+                <img class="w-full h-full object-cover" src="@ViewBag.Fragrance.FragranceImage" alt="" />
+            </div>
+            <div class="images flex gap-2">
+                @foreach (var item in ViewBag.FragranceImages)
+                {
+                    <div><img class="h-full w-full object-cover overflow-y-scroll max-w-full" src="@item.FragranceImageUrl" alt="" /></div>
+                }
+            </div>
+        </div>
+        <div class="flex-1">
+            <h1 class="product-item-title text-2xl font-bold mb-2">@ViewBag.Fragrance.FragranceBrand @ViewBag.Fragrance.FragranceLine</h1>
+            <div class="mb-4">
+                <span class="product-item-price text-primary font-semibold text-5xl mr-2">$@ViewBag.Fragrance.FragrancePrice</span>
+                @if (ViewBag.Fragrance.FragranceOldPrice != null)
+                {
+                    <span class="text-primary font-semibold line-through text-4xl mr-2 opacity-50">$@ViewBag.Fragrance.FragranceOldPrice</span>
+                    <span class="text-sm mr-2 font-semibold bg-lightGrey p-1">Save @(Convert.ToDecimal((ViewBag.Fragrance.FragranceOldPrice - ViewBag.Fragrance.FragrancePrice)/ViewBag.Fragrance.FragranceOldPrice) * 100)%</span>
+                }
+            </div>
+            <p class="leading-7 border-b border-b-lightGrey pb-5">
+                @ViewBag.Fragrance.FragranceDesc
+            </p>
+            <div class="py-5 flex flex-col justify-between w-3/5 mr-auto">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-semibold text-sm">Brand:</p>
+                    <span class="text-left inline-block text-sm">@ViewBag.Fragrance.FragranceBrand</span>
+                </div>
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-semibold text-sm">Line:</p>
+                    <span class="text-left inline-block text-sm text-primary">@ViewBag.Fragrance.FragranceLine</span>
+                </div>
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-semibold text-sm">Availability:</p>
+                    @if (ViewBag.Fragrance.FragranceStock > 0)
+                    {
+                        <span class="text-left inline-block text-sm">@ViewBag.Fragrance.FragranceStock left in stock</span>
+                    }
+                    else
+                    {
+                        <span class="text-left inline-block text-sm">Out of stock</span>
+                    }
+                </div>
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-semibold text-sm">Gender:</p>
+                    <span class="text-left inline-block text-sm">@(ViewBag.Fragrance.FragranceGender == 0 ? "Male" : "Female")</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 h-36 border-t border-t-lightGrey py-10">
+                <div class="flex items-center basis-1/3 h-full">
+                    <button class="w-1/3 h-full border border-lightGrey" id="reduce-product">-</button>
+                    <input class="w-1/3 h-full border border-lightGrey outline-none text-center"
+                            id="product-amount"
+                            type="number"
+                            value="1"
+                            min="1"
+                            disabled
+                            max="@ViewBag.Fragrance.FragranceStock"
+                     />
+                    <button class="w-1/3 h-full border border-lightGrey" id="increase-product">+</button>
+                </div>
+                <button class="basis-1/3 relative text-white bg-primary h-full font-semibold border border-primary disabled:bg-gray disabled:cursor-not-allowed disabled:border-gray add-to-cart" data-id="@ViewBag.Fragrance.FragranceId">
+                    Add to Cart
+                </button>
+                <button class="basis-1/3 relative text-white h-full font-semibold overflow-hidden group bg-gray border border-gray hover:border hover:border-gray">
+                    <span class="relative z-10 group-hover:text-black transition-colors">Buy it now</span>
+                    <span class="absolute inset-0 bg-white transition-transform transform -translate-x-full group-hover:translate-x-0"></span>
+                </button>
+            </div>
+            <div class="flex items-center pb-5 border-b border-b-lightGrey">
+                <button class="flex items-center mr-5">
+                    <img class="w-4 h-4 mr-1" src="~/images/heart.svg" alt="" />
+                    <p class="add-to-favorites font-semibold text-md" data-id="@ViewBag.Fragrance.FragranceId">Add to favorites</p>
+                </button>
+                <button class="flex items-center mr-5">
+                    <img class="w-4 h-4 mr-1" src="~/images/arrows.svg" alt="" />
+                    <a href="/favorites" class="font-semibold text-md">Go to favorites</a>
+                </button>
+                <button class="flex items-center mr-5">
+                    <img class="w-4 h-4 mr-1" src="~/images/email.svg" alt="" />
+                    <p class="font-semibold text-md">Ask about this product</p>
+                </button>
+            </div>
+            <div class="flex gap-4 pt-5">
+                <p>Share:</p>
+                <div class="flex justify-between items-center">
+                    <button class="flex items-center mr-6">
+                        <img class="w-4 h-4 mr-1" src="~/images/facebook.svg" />
+                        <p>facebook</p>
+                    </button>
+                    <button class="flex items-center mr-6">
+                        <img class="w-4 h-4 mr-1" src="~/images/twitter.svg" />
+                        <p>twitter</p>
+                    </button>
+                    <button class="flex items-center mr-6">
+                        <img class="w-4 h-4 mr-1" src="~/images/youtube.svg" />
+                        <p>pinterest</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="product-info">
+    <div class="container mx-auto">
+        <div class="flex gap-8 border-b border-b-lightGrey">
+            <button data-id="description" class="product-info-btn py-5 font-semibold active">Description</button>
+            <button data-id="reviews" class="product-info-btn py-5 font-semibold">Reviews</button>
+            <button data-id="policy" class="product-info-btn py-5 font-semibold">Shipping Policy</button>
+        </div>
+        <div>
+            <div id="description" class="product-info-section py-6 leading-7">
+                <p>
+                    @ViewBag.Fragrance.FragranceLongDesc
+                </p>
+            </div>
+            <div id="reviews" class="product-info-section py-6 hidden">
+                <h2 class="text-center text-2xl font-semibold mb-6">Customer Reviews</h2>
+                <div id="reviews-info" class="flex justify-between items-center border-b border-b-lightGrey pb-10">
+                    <div class="flex flex-col justify-center items-center flex-1">
+                        <div id="reviews-total-rating-stars" class="flex flex-col items-center gap-1">
+                            <div class="stars flex">
+                                @for (var i = 1; i <= 5; i++)
+                                {
+                                    if (i <= ViewBag.ReviewsAverage)
+                                    {
+                                        <img class="h-5 w-5 cursor-pointer"
+                                             src="~/images/star-filled.svg"
+                                             alt="star" />
+                                    }
+                                    else
+                                    {
+                                        <img class="h-5 w-5 cursor-pointer"
+                                             src="~/images/star.svg"
+                                             alt="star" />
+                                    }
+                                }
+                            </div>
+
+                            <span class="inline">@ViewBag.ReviewsAverage out of 5</span>
+                        </div>
+                        <p>Based on @ViewBag.ReviewsCount reviews</p>
+                    </div>
+                    <div class="flex flex-col justify-center items-center flex-1 border-x border-x-lightGrey">
+                        <div class="flex items-center gap-6 mb-1">
+                            <div class="stars flex flex-row-reverse">
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                            </div>
+                            <div class="star-percentage bg-lightGrey h-3 w-40">
+                                <div class="star-percentage-inner bg-blue h-full w-[90%]"></div>
+                            </div>
+                            <p class="text-sm color-gray">1</p>
+                        </div>
+                        <div class="flex items-center gap-6 mb-1">
+                            <div class="stars flex flex-row-reverse">
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                            </div>
+                            <div class="star-percentage bg-lightGrey h-3 w-40">
+                                <div class="star-percentage-inner bg-blue h-full w-[80%]"></div>
+                            </div>
+                            <p class="text-sm color-gray">1</p>
+                        </div>
+                        <div class="flex items-center gap-6 mb-1">
+                            <div class="stars flex flex-row-reverse">
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                            </div>
+                            <div class="star-percentage bg-lightGrey h-3 w-40">
+                                <div class="star-percentage-inner bg-blue h-full w-[40%]"></div>
+                            </div>
+                            <p class="text-sm color-gray">1</p>
+                        </div>
+                        <div class="flex items-center gap-6 mb-1">
+                            <div class="stars flex flex-row-reverse">
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                            </div>
+                            <div class="star-percentage bg-lightGrey h-3 w-40">
+                                <div class="star-percentage-inner bg-blue h-full w-[15%]"></div>
+                            </div>
+                            <p class="text-sm color-gray">1</p>
+                        </div>
+                        <div class="flex items-center gap-6 mb-1">
+                            <div class="stars flex flex-row-reverse">
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                                <img class="h-4 w-4 cursor-pointer peer peer-hover:text-blue hover:text-blue"
+                                     src="~/images/star.svg"
+                                     alt="star" />
+                            </div>
+                            <div class="star-percentage bg-lightGrey h-3 w-40">
+                                <div class="star-percentage-inner bg-blue h-full w-[10%]"></div>
+                            </div>
+                            <p class="text-sm color-gray">1</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center items-center flex-1">
+                        <button id="open-review-btn" class="bg-blue text-md text-white font-semibold py-2 px-10">
+                            Write a review
+                        </button>
+                    </div>
+                </div>
+                <div id="write-review" class="py-6 border-b border-b-lightGrey w-1/2 mx-auto scroll-my-24 hidden">
+                    <form id="write-review-form" action="/api/reviews" method="post">
+                        <h2 class="text-center text-2xl font-semibold mb-4">Write a review</h2>
+                        <label for="FragranceReviewRating" class="block text-center mb-2">Rating</label>
+                        <div class="stars flex justify-center mb-4 relative">
+                            <!-- Individual star images for visual feedback -->
+                            <img class="h-7 w-7 star hover:cursor-pointer" src="~/images/star-filled.svg" alt="star"/>
+                            <img class="h-7 w-7 star hover:cursor-pointer" src="~/images/star.svg" alt="star" />
+                            <img class="h-7 w-7 star hover:cursor-pointer" src="~/images/star.svg" alt="star" />
+                            <img class="h-7 w-7 star hover:cursor-pointer" src="~/images/star.svg" alt="star" />
+                            <img class="h-7 w-7 star hover:cursor-pointer" src="~/images/star.svg" alt="star" />
+
+                            <!-- Hidden radio buttons for form submission -->
+                            <div class="star-inputs absolute inset-0 flex justify-center gap-[15px]">
+                                <input class="opacity-0 cursor-pointer" type="radio" name="FragranceReviewRating" value="1" checked/>
+                                <input class="opacity-0 cursor-pointer" type="radio" name="FragranceReviewRating" value="2" />
+                                <input class="opacity-0 cursor-pointer" type="radio" name="FragranceReviewRating" value="3" />
+                                <input class="opacity-0 cursor-pointer" type="radio" name="FragranceReviewRating" value="4" />
+                                <input class="opacity-0 cursor-pointer" type="radio" name="FragranceReviewRating" value="5" />
+                            </div>
+                        </div>
+
+                        <label class="text-center block mb-2" for="review-title">Review Title</label>
+                        <input class="block border border-gray outline-none w-full p-3.5 mb-8 text-sm"
+                               type="text"
+                               id="review-title"
+                               name="FragranceReviewTitle"
+                               placeholder="Give your review a title"
+                               required />
+
+                        <label class="text-center block mb-2" for="review-text">Review</label>
+                        <textarea class="block border border-gray outline-none w-full p-3.5 mb-8 text-sm text-left text-black"
+                                  rows="8"
+                                  id="review-text"
+                                  name="FragranceReviewText"
+                                  value=""
+                                  placeholder="Write your comments here"
+                                  required>
+                        </textarea>
+
+                        <input type="hidden" name="FragranceReviewFragranceId" value="@ViewBag.Fragrance.FragranceId" />
+
+                        <p class="block w-full p-3.5 border border-blue text-blue text-md text-center mb-1 cursor-pointer" id="cancel-review-btn">
+                            Cancel Review
+                        </p>
+                        <button class="block w-full p-3.5 bg-blue text-white text-md mb-1 disabled:bg-gray" id="submit-review-btn" type="submit">
+                            Submit Review
+                        </button>
+                    </form>
+                </div>
+                <div id="customer-reviews">
+                    @foreach (var item in ViewBag.Reviews)
+                    {
+                        <div class="user-review py-5 border-b border-b-lightGrey">
+                            <div class="user-review-top flex justify-between items-center">
+                                <div class="stars flex mb-2">
+                                    @for (var i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= item.FragranceReviewRating)
+                                        {
+                                            <img class="h-5 w-5 cursor-pointer" src="~/images/star-filled.svg" alt="star" />
+                                        }
+                                        else
+                                        {
+                                            <img class="h-5 w-5 cursor-pointer" src="~/images/star.svg" alt="star" />
+                                        }
+                                    }
+                                </div>
+
+                                <p class="date text-sm text-gray">@item.FragranceReviewDate</p>
+                            </div>
+
+                            <div class="profile flex gap-2 mb-2">
+                                <img class="h-8 w-9 p-1 bg-lightGrey"
+                                     src="~/images/avatar.svg"
+                                     alt="avatar" />
+                                <h4 class="text-md">@item.UserName @item.UserSurname</h4>
+                            </div>
+
+                            <h3 class="font-semibold mb-1">@item.FragranceReviewTitle</h3>
+                            <p class="text-sm">@item.FragranceReviewText</p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div id="policy" class="product-info-section py-6 leading-7 hidden">
+                <p>
+                    The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV
+                    quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick
+                    jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright
+                    vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing
+                    daft Jim. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs!
+                    "Now fax quiz Jack! " my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed
+                    by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack
+                    might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over
+                    the lazy fox.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl lowercase font-bold text-center mb-16 relative after:content-[''] after:absolute after:-bottom-3 after:left-1/2 after:h-0.5 after:w-28 after:-translate-x-1/2 after:bg-primary">Related Products</h1>
+        <div class="grid grid-cols-4 gap-8">
+            @foreach (var item in ViewBag.Related)
+            {
+                <a href="/products/@item.FragranceId" class="fragrance">
+                    <div class="img cursor-pointer relative group mb-6">
+                        <img class="h-80 w-full object-cover" src="@item.FragranceImage" alt="" />
+                        <div class="icons flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span class="bg-white block w-12 h-12 border border-gray border-r-0 flex justify-center items-center">
+                                <img class="w-4 h-4" src="~/images/eye.svg" alt="eye" />
+                            </span>
+                            <span class="bg-white block w-12 h-12 border border-gray border-r-0 flex justify-center items-center">
+                                <img class="w-4 h-4" src="~/images/heart.svg" alt="heart" />
+                            </span>
+                            <span class="bg-white block w-12 h-12 border border-gray border-r-0 flex justify-center items-center">
+                                <img class="w-4 h-4" src="~/images/cart.svg" alt="cart" />
+                            </span>
+                            <span class="bg-white block w-12 h-12 border border-gray flex justify-center items-center">
+                                <img class="w-4 h-4" src="~/images/arrows.svg" alt="arrows" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info text-center">
+                        <h3 class="uppercase font-bold text-sm mb-1">@item.FragranceBrand @item.FragranceLine </h3>
+                        <div class="prices">
+                            <span class="text-sm mr-1">$@item.FragrancePrice</span>
+                            @if (item.FragranceOldPrice != null)
+                            {
+                               <span class="text-xs text-primary line-through">$@item.FragranceOldPrice</span>
+                            }
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>

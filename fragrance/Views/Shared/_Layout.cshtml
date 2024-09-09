@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/configs/tailwind.config.js"></script>
+    <script type="module" defer src="~/js/utils/notify.js"></script>
+    <script type="module" defer src="~/js/utils/fragrance.js"></script>
+    <script type="module" defer src="~/js/utils/cart.js"></script>
+    <script type="module" defer src="~/js/main.js"></script>
+    @RenderSection("AccountPageScript", false)
+    @RenderSection("HomePageScript", false)
+    @RenderSection("ProductsPageScript", false)
+    @RenderSection("ProductPageScript", false)
+    @RenderSection("FavoritesPageScript", false)
+    @RenderSection("CheckoutPageScript", false)
+    <title>@ViewData["Title"]</title>
+</head>
+<body class="font-primary">
+    <header class="flex items-center justify-between p-11 sticky top-0 left-0 z-10 bg-white shadow-md">
+        <a href="/" class="h-4">
+            <img class="w-full h-full" src="~/images/header-logo.png" alt="fiama logo" />
+        </a>
+        <nav>
+            <ul class="uppercase text-sm flex gap-8">
+                <li class="hover:text-primary @(ViewData["Title"]?.ToString() == "Home" ? "active" : "")">
+                    <a href="/">Home</a>
+                </li>
+                <li class="hover:text-primary @(ViewData["Title"]?.ToString() == "Products" ? "active" : "")">
+                    <a href="/products">Products</a>
+                </li>
+                <li class="hover:text-primary @(ViewData["Title"]?.ToString() == "About" ? "active" : "")">
+                    <a href="/about">About us</a>
+                </li>
+                <li class="hover:text-primary @(ViewData["Title"]?.ToString() == "Contact" ? "active" : "")">
+                    <a href="/contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="flex gap-4">
+            <div id="account-btn" class="h-5 cursor-pointer hover:fill-primary relative">
+                <img class="w-full h-full" src="~/images/avatar.svg" alt="avatar" />
+                <ul id="account" class="absolute top-5 right-0 bg-white pt-4 pb-4 pl-4 pr-8 shadow-2xl border-t border-t-lightGrey w-max">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="mb-4 hover:text-primary"><a class="w-full h-full" href="/auth/account">@User.Identity.Name @User.FindFirst("Surname")?.Value</a></li>
+                        <li class="mb-4 hover:text-primary"><a class="w-full h-full" href="/favorites">Favorites</a></li>
+                        <li class="hover:text-primary"><button id="logout-btn" class="w-full h-full text-left">Logout</button></li>
+                    }
+                    else
+                    {
+                        <li class="mb-4 hover:text-primary"><a class="w-full h-full" href="/auth/login">Login</a></li>
+                        <li class="hover:text-primary"><a class="w-full h-full" href="/auth/register">Signup</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="h-5 cursor-pointer hover:fill-primary-900 flex cart-action">
+                <img class="w-full h-full" src="~/images/cart.svg" alt="cart" />
+                <span class="py-2 text-xs cart-count">0</span>
+            </div>
+        </div>
+        <div id="cart" class="px-6 fixed top-0 right-0 h-full w-1/4 bg-white z-50">
+            <div class="cart-header flex items-center justify-between border-b border-b-lightGrey py-6">
+                <h3 class="font-semibold">Cart</h3>
+                <button class="font-semibold cart-action">X</button>
+            </div>
+            <div class="cart-items overflow-y-scroll h-2/3">
+
+            </div>
+            <div class="cart-info flex justify-between py-6">
+                <p class="font-semibold text-lg">Subtotal:</p>
+                <p class="font-semibold text-lg text-primary cart-total-price"></p>
+            </div>
+            <div class="cart-controls h-14 flex gap-4">
+                <button class="basis-1/2 relative text-primary h-full font-semibold overflow-hidden group bg-white border border-primary hover:border">
+                    <span class="relative z-10 group-hover:text-white transition-colors">View cart</span>
+                    <span class="absolute inset-0 bg-primary transition-transform transform -translate-x-full group-hover:translate-x-0"></span>
+                </button>
+                <a href="/checkout" class="flex justify-center items-center basis-1/2 relative bg-primary text-white h-full font-semibold border border-white disabled:bg-gray disabled:cursor-not-allowed">
+                    Checkout
+                </a>
+            </div>
+            <p class="text-sm py-3">Free Shipping on All Orders Over $100!</p>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer class="bg-secondary text-white py-24">
+        <div class="container mx-auto flex flex-wrap justify-between gap-8">
+            <div>
+                <h3 class="text-sm uppercase mb-8">My Account</h3>
+
+                <ul>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/auth/account">Account</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/favorites">Favorites</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/checkout">Shopping Cart</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm uppercase mb-8">Quick Links</h3>
+
+                <ul>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/auth/account">Account</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/contact#location">Store location</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm uppercase mb-8">Information</h3>
+
+                <ul>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/about">About</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/contact">Contact</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/products">Products</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm uppercase mb-8">Company</h3>
+
+                <ul>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="#">Shipping Policy</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="/contact">Help & Contact Us</a></li>
+                    <li class="text-sm text-gray mb-5 hover:text-primary"><a href="#">Terms and Conditions</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-sm uppercase mb-8">About our shop</h3>
+
+                <p class="text-sm text-gray mb-6 w-80">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, rem?</p>
+
+                <div class="mb-8">
+                    <div class="mb-5 flex gap-4 items-center">
+                        <img class="h-4 w-4" src="~/images/location.svg" alt="location" />
+                        <p class="text-sm text-gray">Baku, 28th May St.</p>
+                    </div>
+                    <div class="mb-5 flex gap-4 items-center">
+                        <img class="h-4 w-4" src="~/images/phone.svg" alt="phone" />
+                        <a class="text-sm text-gray" href="tel:+994516780098">+994516780098</a>
+                    </div>
+                    <div class="mb-5 flex gap-4 items-center">
+                        <img class="h-4 w-4" src="~/images/email.svg" alt="email" />
+                        <a class="text-sm text-gray" href="mailto:orkhan.rz8@gmail.com">orkhan.rz8@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="social flex gap-6">
+                    <span class="text-sm"><a href="#"><img class="w-4 h-4" src="~/images/facebook.svg" alt="facebook"></a></span>
+                    <span class="text-sm"><a href="#"><img class="w-4 h-4" src="~/images/twitter.svg" alt="twitter"></a></span>
+                    <span class="text-sm"><a href="#"><img class="w-4 h-4" src="~/images/youtube.svg" alt="youtube"></a></span>
+                    <span class="text-sm"><a href="#"><img class="w-4 h-4" src="~/images/vimeo-v.svg" alt="vimeo"></a></span>
+                    <span class="text-sm"><a href="#"><img class="w-4 h-4" src="~/images/tiktok.svg" alt="tiktok"></a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

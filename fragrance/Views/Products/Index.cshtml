@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+
+@section ProductsPageScript {
+    <script type="module" src="~/js/scripts/productsPage.js"></script>
+}
+
+<section class="py-14 bg-lightGrey">
+    <h1 class="text-4xl font-bold text-center mb-6">Products</h1>
+    <ul class="flex justify-center gap-2">
+        <li class="relative after:content-['>'] after:ml-2 after:text-gray text-gray"><a href="/">Home</a></li>
+        <li><a href="/products">Products</a></li>
+    </ul>
+</section>
+
+<section class="py-20">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <form id="filtration-form" class="bg-white p-6 shadow-md">
+                    <h2 class="text-lg font-bold mb-4">Filter Products</h2>
+
+                    <!-- Brand Filter -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="brand">Brand</label>
+                        <input type="text" id="brand" name="brand" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary" placeholder="Enter brand name" value="">
+                    </div>
+
+                    <!-- Line Filter -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="line">Line</label>
+                        <input type="text" id="line" name="line" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary" placeholder="Enter line name" value="">
+                    </div>
+
+                    <!-- Gender Filter -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="gender">Gender</label>
+                        <select id="gender" name="gender" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary">
+                            <option value="">Select Gender</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="minPrice">Min Price</label>
+                        <input type="number" name="minPrice" id="minPrice" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary" placeholder="Min Price">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="maxPrice">Max Price</label>
+                        <input type="number" name="maxPrice" id="maxPrice" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary" placeholder="Max Price">
+                    </div>
+
+                    <!-- Limit Filter -->
+                    <div class="mb-4">
+                        <label class="block font-medium mb-2" for="limit">Limit</label>
+                        <input type="number" name="limit" id="limit" class="text-sm w-full outline-none border border-gray rounded p-2 focus:border-primary" placeholder="Number of products">
+                    </div>
+
+                    <!-- Apply Filters Button -->
+                    <button id="apply-filters" class="w-full bg-primary text-white py-2 rounded mt-4">Apply Filters</button>
+                </form>
+            </div>
+
+            <div class="fragrance-items col-span-3 grid grid-cols-3 gap-8"></div>
+        </div>
+        
+    </div>
+</section>
+

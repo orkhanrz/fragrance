@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Favorites";
+}
+
+@section FavoritesPageScript {
+    <script type="module" src="~/js/scripts/favoritesPage.js"></script>
+}
+
+<section class="py-14 bg-lightGrey">
+    <h1 class="text-4xl font-bold text-center mb-6">Favorites</h1>
+    <ul class="flex justify-center gap-2">
+        <li class="relative after:content-['>'] after:ml-2 after:text-gray text-gray"><a href="/">Home</a></li>
+        <li><a href="/Favorites">Favorites</a></li>
+    </ul>
+</section>
+
+<section class="py-20">
+    <div class="container mx-auto">
+        <div class="fragrance-items grid grid-cols-4 gap-8"></div>
+    </div>
+</section>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<main class="p-11">
+    <h1 class="text-3xl font-bold mb-8 text-center">Edit Fragrance</h1>
+
+    <form method="post" action="/api/fragrances/@ViewBag.Fragrance.FragranceId" enctype="multipart/form-data">
+        <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Brand" type="text" id="brand" name="FragranceBrand" value="@ViewBag.Fragrance.FragranceBrand" required />
+
+        <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Line" type="text" id="line" name="FragranceLine" value="@ViewBag.Fragrance.FragranceLine" required />
+
+        <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Price" type="number" id="price" name="FragrancePrice" value="@ViewBag.Fragrance.FragrancePrice" required />
+
+        <select class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" name="FragranceGender" id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="0" selected="@(ViewBag.Fragrance.FragranceGender == 0)">Male</option>
+            <option value="1" selected="@(ViewBag.Fragrance.FragranceGender == 1)">Female</option>
+        </select>
+
+        <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Stock" type="number" id="stock" name="FragranceStock" value="@ViewBag.Fragrance.FragranceStock" required />
+
+        <input id="fragrance-image-input" class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Image" type="file" accept="image/*" name="FragranceImage" />
+        <div class="w-[500px] mx-auto mb-8">
+            <img id="fragrance-image" class="object-cover w-full" src="@ViewBag.Fragrance.FragranceImage" alt="Fragrance" />
+        </div>
+
+        <input id="fragrance-images-input" class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Images" type="file" accept="image/*" name="FragranceImages" multiple />
+        <div id="fragrance-images" class="flex mb-8 gap-8">
+            @foreach (var item in ViewBag.FragranceImages)
+            {
+                <div class="flex-1">
+                    <img class="object-cover w-full h-full" src="@item.FragranceImageUrl" alt="Fragrance" />
+                </div>
+            }
+        </div>
+
+        <input class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Description" type="text" id="description" name="FragranceDesc" value="@ViewBag.Fragrance.FragranceDesc" required />
+
+        <textarea class="border border-lightGrey w-full p-5 mb-8 text-sm outline-none focus:border-primary" placeholder="Fragrance Long Description" id="long-desc" name="FragranceLongDesc" rows="8">@ViewBag.Fragrance.FragranceLongDesc</textarea>
+
+        <div class="flex items-center justify-end mb-6 gap-4">
+            <button class="py-5 px-10 font-semibold bg-primary text-white transition-colors transition-100" type="submit">Edit</button>
+            <a href="/admin/products" class="py-5 px-10 font-semibold bg-gray text-white transition-colors transition-100" type="button">Cancel</a>
+        </div>
+    </form>
+</main>
+<script>const fragranceImage = document.getElementById("fragrance-image");
+    const fragranceImages = document.getElementById("fragrance-images");
+    const fragranceImageInput = document.getElementById("fragrance-image-input");
+    const fragranceImagesInput = document.getElementById("fragrance-images-input");
+
+    fragranceImageInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                fragranceImage.src = event.target.result;
+            }
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+    fragranceImagesInput.addEventListener('change', function (e) {
+        const files = e.target.files;
+
+        if (files.length) {
+            fragranceImages.innerHTML = "";
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.classList.add('flex-1')
+                    const img = document.createElement('img');
+                    img.classList.add('object-cover', 'w-full', 'h-full');
+                    img.src = event.target.result;
+                    img.alt = "Fragrance";
+
+                    imgDiv.appendChild(img);
+                    fragranceImages.appendChild(imgDiv);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+    });</script>

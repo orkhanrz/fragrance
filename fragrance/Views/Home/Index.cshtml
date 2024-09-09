@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@section HomePageScript {
+    <script type="module" src="~/js/scripts/homePage.js"></script>
+}
+
+<section class="flex flex-col items-center justify-center gap-8 bg-hero bg-center bg-cover text-white font-semibold h-[80vh]">
+    <h3 class="text-2xl">Flower & Gift</h3>
+    <h1 class="text-5xl w-2/6 text-center">Perfect Bunch For Every Occasion</h1>
+    <a href="/products" class="bg-primary py-4 px-6 hover:bg-white hover:text-primary">Show Now</a>
+</section>
+
+<section class="py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl lowercase font-bold text-center mb-16 relative after:content-[''] after:absolute after:-bottom-3 after:left-1/2 after:h-0.5 after:w-28 after:-translate-x-1/2 after:bg-primary">New Arrival Items</h1>
+        <div class="fragrance-items grid grid-cols-4 gap-8"></div>
+    </div>
+</section>
+
+@await Html.PartialAsync("~/Views/Shared/_ServicesPartial.cshtml")
+
+<section class="team py-20">
+    <div class="container mx-auto">
+        <h1 class="text-4xl lowercase font-bold text-center mb-16 relative after:content-[''] after:absolute after:-bottom-3 after:left-1/2 after:h-0.5 after:w-28 after:-translate-x-1/2 after:bg-primary">Our Team</h1>
+        <div class="teamItems grid grid-cols-4 gap-8">
+            <div class="teamItem border border-borderGray hover:shadow-lg duration-300">
+                <div class="teamImg mb-6">
+                    <img class="w-full h-full" src="~/images/team-2.jpg" />
+                </div>
+                <div class="teamInfo text-center">
+                    <h3 class="font-bold text-lg mb-2">William Gabriel</h3>
+                    <h4 class="font-semibold mb-6">Founder</h4>
+                </div>
+            </div>
+            <div class="teamItem border border-borderGray hover:shadow-lg duration-300">
+                <div class="teamImg mb-6">
+                    <img class="w-full h-full" src="~/images/team-2.jpg" />
+                </div>
+                <div class="teamInfo text-center">
+                    <h3 class="font-bold text-lg mb-2">William Gabriel</h3>
+                    <h4 class="font-semibold mb-6">Founder</h4>
+                </div>
+            </div>
+            <div class="teamItem border border-borderGray hover:shadow-lg duration-300">
+                <div class="teamImg mb-6">
+                    <img class="w-full h-full" src="~/images/team-2.jpg" />
+                </div>
+                <div class="teamInfo text-center">
+                    <h3 class="font-bold text-lg mb-2">William Gabriel</h3>
+                    <h4 class="font-semibold mb-6">Founder</h4>
+                </div>
+            </div>
+            <div class="teamItem border border-borderGray hover:shadow-lg duration-300">
+                <div class="teamImg mb-6">
+                    <img class="w-full h-full" src="~/images/team-2.jpg" />
+                </div>
+                <div class="teamInfo text-center">
+                    <h3 class="font-bold text-lg mb-2">William Gabriel</h3>
+                    <h4 class="font-semibold mb-6">Founder</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter text-white flex flex-col justify-center bg-cover items-center bg-newsletter bg-cover bg-center p-40">
+    <h1 class="font-bold text-5xl mb-8">Get The Latest Deals</h1>
+    <p class="mb-8 text-md">$30 coupon for first shopping</p>
+    <div class="flex h-16 w-2/3">
+        <input type="text" class="px-8 basis-full flex-grow text-black outline-none focus:border focus:border-primary" />
+        <button class="bg-primary px-8">Subscribe</button>
+    </div>
+</section>
+

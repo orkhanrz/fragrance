@@ -1,0 +1,57 @@
+header nav li.active {
+    color: #E45471;
+}
+
+input[type="text"]:disabled, input[type="text"]:read-only {
+    cursor: not-allowed;
+}
+
+#cart {
+    transform: translateX(100%);
+    transition: transform 500ms ease;
+}
+
+#cart.active {
+    transform: translateX(0);
+}
+
+#account {
+    opacity: 0;
+    transition: opacity 500ms ease;
+}
+
+#account.active {
+    opacity: 1;
+}
+
+.product-info-btn {
+    position: relative;
+}
+
+.product-info-btn.active {
+    color: #e45471;
+}
+
+.product-info-btn.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #e45471;
+}
+
+#checkout-form-btn {
+    border: 1px solid #E45471;
+    background: #E45471;
+    color: white;
+    cursor: pointer;
+}
+
+#checkout-form-btn:disabled {
+    border: 1px solid #999999;
+    background: #999999;
+    color: #FBFBFB;
+    cursor: not-allowed;
+}
